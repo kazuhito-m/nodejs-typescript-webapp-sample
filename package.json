@@ -71,7 +71,7 @@
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/main/ts/**/*.ts"
+      "src/**/*.ts"
     ]
   }
 }
