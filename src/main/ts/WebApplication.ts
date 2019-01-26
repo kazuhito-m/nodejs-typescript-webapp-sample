@@ -1,5 +1,7 @@
 import * as express from 'express';
 import Parameters from "./infrastracture/datasource/config/Parameters";
+import ApiV1RouterWrapper from './presentation/apiv1/ApiV1RouterWrapper';
+import { AddressInfo } from 'net';
 
 export default class WebApplication {
   public async run(argv: string[]) {
@@ -7,32 +9,13 @@ export default class WebApplication {
     parameters.analyzeArgs();
     const settings = parameters.loadSettings();
 
-    console.log(settings.sonarqubeUrl);
-
     const app = express();
 
-    const server = app.listen(3000, function () {
-      console.log("Node.js is listening to PORT:" + server.address());
-    });
+    const apiV1RouterWrapper = new ApiV1RouterWrapper();
+    app.use(apiV1RouterWrapper.uri, apiV1RouterWrapper.build());
 
-    // 写真のサンプルデータ
-    var photoList = [
-      {
-        id: "001",
-        name: "photo001.jpg",
-        type: "jpg",
-        dataUrl: "http://localhost:3000/data/photo001.jpg"
-      }, {
-        id: "002",
-        name: "photo002.jpg",
-        type: "jpg",
-        dataUrl: "http://localhost:3000/data/photo002.jpg"
-      }
-    ]
-
-    // 写真リストを取得するAPI
-    app.get("/api/photo/list", function (req, res, next) {
-      res.json(photoList);
+    const server = app.listen(settings.port, () => {
+      console.log("Node.js & Express is listening to Port:" + (<AddressInfo>server.address()).port);
     });
   }
 }
