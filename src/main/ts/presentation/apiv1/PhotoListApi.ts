@@ -1,18 +1,20 @@
-import { Request , Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import Api from "../Api";
 import HttpMethod from "../HttpMethod";
 
+/**
+ * 写真データを返すAPI。
+ */
 export default class PhotoListApi implements Api {
-    public get uri(): string {
+    public get uri() {
         return '/photo/list';
     }
 
-    public get method(): HttpMethod {
+    public get method() {
         return HttpMethod.Get;
     }
 
     public execute(req: Request, res: Response, next: NextFunction): any {
-        // 写真のサンプルデータ
         var photoList = [
             {
                 id: "001",
