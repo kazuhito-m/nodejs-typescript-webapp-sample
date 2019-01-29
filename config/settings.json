@@ -1,3 +1,10 @@
 {
-  "port": 3000
+  "port": 3000,
+  "pg": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "sample",
+    "user": "sample_user",
+    "password": "sample_password"
+    }
 }
