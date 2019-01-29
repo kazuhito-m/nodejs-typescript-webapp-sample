@@ -1,5 +1,6 @@
 import * as express from 'express';
-import Parameters from "./infrastracture/datasource/config/Parameters";
+import * as bodyParser from 'body-parser';
+import Parameters from './infrastracture/datasource/config/Parameters';
 import ApiV1RouterWrapper from './presentation/apiv1/ApiV1RouterWrapper';
 import { AddressInfo } from 'net';
 
@@ -11,11 +12,15 @@ export default class WebApplication {
 
     const app = express();
 
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json());
+
     const apiV1RouterWrapper = new ApiV1RouterWrapper();
     app.use(apiV1RouterWrapper.uri, apiV1RouterWrapper.build());
 
     const server = app.listen(settings.port, () => {
-      console.log("Node.js & Express is listening to Port:" + (<AddressInfo>server.address()).port);
+      const port = (<AddressInfo>server.address()).port;
+      console.log('Node.js & Express is listening to Port:' + port);
     });
   }
 }

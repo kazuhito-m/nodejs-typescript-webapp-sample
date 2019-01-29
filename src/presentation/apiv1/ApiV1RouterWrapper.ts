@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import * as bodyParser from 'body-parser';
 import Api from '../Api';
 import PhotoListApi from './PhotoListApi';
 import HttpMethod from '../HttpMethod';
@@ -22,9 +21,6 @@ export default class ApiV1RouterWrapper {
 
   public build(): Router {
     const router = Router();
-
-    router.use(bodyParser.urlencoded({ extended: true }));
-    router.use(bodyParser.json());
 
     this.apis.forEach(api => {
       if (api.method === HttpMethod.Get)
