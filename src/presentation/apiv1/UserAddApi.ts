@@ -19,8 +19,14 @@ export default class UserAddApi implements Api {
   }
 
   public async execute(req: Request, res: Response, next: NextFunction): Promise<any> {
-    const user = User.prototypeOf(req.body.name);
-    const createdUser = await this.service.register(user);
-    res.json(createdUser);
+    try {
+      const user = User.prototypeOf(req.body.name);
+      const createdUser = await this.service.register(user);
+      res.status(201).json(createdUser);
+    } catch (e) {
+      console.error(e.message)
+      res.status(409);
+      next('予期せぬエラーが発生しました。');
+    }
   }
 }
