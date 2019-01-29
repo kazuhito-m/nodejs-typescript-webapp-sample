@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/kazuhito-m/sonarqube-gitlab-project-sync-remover#readme",
   "devDependencies": {
+    "@types/body-parser": "^1.17.0",
     "@types/commander": "^2.12.2",
     "@types/express": "^4.16.1",
     "@types/jest": "^23.3.13",
@@ -44,6 +45,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
     "commander": "^2.19.0",
     "express": "^4.16.4",
     "express-list-endpoints": "^4.0.0",
