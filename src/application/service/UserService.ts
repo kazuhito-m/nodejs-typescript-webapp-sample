@@ -5,7 +5,7 @@ export default class UserService {
     constructor(private readonly repository : UserRepository) {
     }
 
-    public all(): Users {
+    public all(): Promise<Users> {
         return this.repository.all();
-    }   
+    }
 }

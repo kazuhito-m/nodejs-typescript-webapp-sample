@@ -17,8 +17,8 @@ export default class UsersApi implements Api {
         return HttpMethod.Get;
     }
 
-    public execute(req: Request, res: Response, next: NextFunction): any {
-        const users = this.service.all();
+    public async execute(req: Request, res: Response, next: NextFunction): Promise<any> {
+        const users = await this.service.all();
         res.json(users.list());
     }
 }
