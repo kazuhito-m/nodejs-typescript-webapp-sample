@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import Api from '../Api';
-import UserService from '../../application/service/UserService';
-import HttpMethod from '../HttpMethod';
-import User from '../../domain/user/User';
+import Api from '../../Api';
+import UserService from '../../../application/service/UserService';
+import HttpMethod from '../../HttpMethod';
+import User from '../../../domain/user/User';
 
 /**
  * Userを追加するAPI。

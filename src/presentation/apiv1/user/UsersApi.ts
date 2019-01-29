@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import Api from "../Api";
-import HttpMethod from "../HttpMethod";
-import UserService from "../../application/service/UserService";
+import Api from "../../Api";
+import HttpMethod from "../../HttpMethod";
+import UserService from "../../../application/service/UserService";
 
 /**
  * このシステムのユーザ群を返すAPI。

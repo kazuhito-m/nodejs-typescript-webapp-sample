@@ -5,8 +5,8 @@ import HttpMethod from '../HttpMethod';
 import UserService from '../../application/service/UserService';
 import UserDatasource from '../../infrastracture/datasource/user/UserDatasource';
 import { Client } from 'pg';
-import UsersApi from './UsersApi';
-import UserAddApi from './UserAddApi';
+import UsersApi from './user/UsersApi';
+import UserAddApi from './user/UserAddApi';
 import UserApi from './UserApi';
 
 export default class ApiV1RouterWrapper {
