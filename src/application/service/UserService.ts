@@ -13,4 +13,8 @@ export default class UserService {
     public register(user: User): Promise<User> {
         return this.repository.register(user);
     }
+
+    public get(userIdentifier: number): Promise<User> {
+        return this.repository.get(userIdentifier);
+    }
 }

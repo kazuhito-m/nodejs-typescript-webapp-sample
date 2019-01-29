@@ -7,6 +7,7 @@ import UserDatasource from '../../infrastracture/datasource/user/UserDatasource'
 import { Client } from 'pg';
 import UsersApi from './UsersApi';
 import UserAddApi from './UserAddApi';
+import UserApi from './UserApi';
 
 export default class ApiV1RouterWrapper {
   public get uri(): string {
@@ -16,7 +17,8 @@ export default class ApiV1RouterWrapper {
   private readonly apis: Api[] = [
     new PhotoListApi(),
     new UsersApi(new UserService(new UserDatasource(this.createPgClient()))), // TODO DIになんとかできないか…
-    new UserAddApi(new UserService(new UserDatasource(this.createPgClient())))
+    new UserAddApi(new UserService(new UserDatasource(this.createPgClient()))),
+    new UserApi(new UserService(new UserDatasource(this.createPgClient())))
   ];
 
   public build(): Router {
