@@ -2,6 +2,8 @@
 
 CREATE SCHEMA sample_user AUTHORIZATION sample_user;
 
+CREATE SEQUENCE sample_user.users_seq;
+
 CREATE TABLE sample_user.users
 (
   user_identifier   BIGINT      NOT NULL PRIMARY KEY,
