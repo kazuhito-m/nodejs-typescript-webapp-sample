@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { injectable, inject } from 'inversify';
 import Api from "../../Api";
 import HttpMethod from "../../HttpMethod";
 import UserService from "../../../application/service/UserService";
@@ -6,8 +7,9 @@ import UserService from "../../../application/service/UserService";
 /**
  * このシステムのユーザ群を返すAPI。
  */
-export default class UsersApi implements Api {
-    constructor(private readonly service: UserService) { }
+@injectable()
+ export default class UsersApi implements Api {
+    constructor(@inject('UserService') private readonly service: UserService) { }
 
     public get uri() {
         return '/users';

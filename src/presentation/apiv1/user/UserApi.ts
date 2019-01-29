@@ -1,14 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
-import Api from '../Api';
-import HttpMethod from '../HttpMethod';
-import UserService from '../../application/service/UserService';
-import User from '../../domain/user/User';
+import { injectable, inject } from 'inversify';
+import Api from '../../Api';
+import HttpMethod from '../../HttpMethod';
+import UserService from '../../../application/service/UserService';
+import User from '../../../domain/user/User';
 
 /**
  * このシステムのユーザを返すAPI。
  */
+@injectable()
 export default class UserApi implements Api {
-  constructor(private readonly service: UserService) {}
+  constructor(@inject('UserService') private readonly service: UserService) {}
 
   public get uri() {
     return '/users/:userIdentifier';
@@ -18,7 +20,11 @@ export default class UserApi implements Api {
     return HttpMethod.Get;
   }
 
-  public async execute(req: Request, res: Response, next: NextFunction): Promise<any> {
+  public async execute(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<any> {
     try {
       const userIdentifier: number = req.params.userIdentifier;
       const user: User = await this.service.get(userIdentifier);

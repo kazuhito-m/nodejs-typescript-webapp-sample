@@ -1,24 +1,29 @@
+import { injectable, inject } from 'inversify';
 import { Router } from 'express';
 import Api from '../Api';
 import PhotoListApi from './PhotoListApi';
 import HttpMethod from '../HttpMethod';
-import UserService from '../../application/service/UserService';
-import UserDatasource from '../../infrastracture/datasource/user/UserDatasource';
-import { Client } from 'pg';
 import UsersApi from './user/UsersApi';
 import UserAddApi from './user/UserAddApi';
-import UserApi from './UserApi';
+import UserApi from './user/UserApi';
 
+@injectable()
 export default class ApiV1RouterWrapper {
+  constructor(
+    @inject('UsersApi') private readonly usersApi: UsersApi,
+    @inject('UserAddApi') private readonly userAddApi: UserAddApi,
+    @inject('UserApi') private readonly userApi: UserApi
+  ) {}
+
   public get uri(): string {
     return '/api/v1';
   }
 
   private readonly apis: Api[] = [
     new PhotoListApi(),
-    new UsersApi(new UserService(new UserDatasource(this.createPgClient()))), // TODO DIになんとかできないか…
-    new UserAddApi(new UserService(new UserDatasource(this.createPgClient()))),
-    new UserApi(new UserService(new UserDatasource(this.createPgClient())))
+    this.usersApi,
+    this.userAddApi,
+    this.userApi
   ];
 
   public build(): Router {
@@ -32,17 +37,5 @@ export default class ApiV1RouterWrapper {
     });
 
     return router;
-  }
-
-  private createPgClient(): Client {
-    const client = new Client({
-      host: 'localhost',
-      port: 5432,
-      database: 'sample',
-      user: 'sample_user',
-      password: 'sample_password'
-    });
-    client.connect();
-    return client;
   }
 }
