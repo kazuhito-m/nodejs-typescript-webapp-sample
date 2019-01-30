@@ -4,7 +4,7 @@ import * as bodyParser from 'body-parser';
 import Parameters from './infrastracture/datasource/config/Parameters';
 import ApiV1RouterWrapper from './presentation/apiv1/ApiV1RouterWrapper';
 import { AddressInfo } from 'net';
-import DiDifiner from './DiDifiner';
+import DIContainerBuilder from './DIContainerBuilder';
 
 export default class WebApplication {
   public async run(argv: string[]) {
@@ -12,7 +12,7 @@ export default class WebApplication {
     parameters.analyzeArgs();
     const settings = parameters.loadSettings();
 
-    const diDifiner = new DiDifiner(settings);
+    const diDifiner = new DIContainerBuilder(settings);
     const container = diDifiner.build();
 
     const app = express();

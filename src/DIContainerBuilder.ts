@@ -9,7 +9,7 @@ import UserApi from './presentation/apiv1/user/UserApi';
 import UsersApi from './presentation/apiv1/user/UsersApi';
 import ApiV1RouterWrapper from './presentation/apiv1/ApiV1RouterWrapper';
 
-export default class DiDifiner {
+export default class DIContainerBuilder {
   constructor(private readonly settings: Settings) {}
 
   public build(): Container {
