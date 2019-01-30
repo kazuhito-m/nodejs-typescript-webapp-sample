@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { injectable, inject } from 'inversify';
 import Api from '../../Api';
 import UserService from '../../../application/service/UserService';
 import HttpMethod from '../../HttpMethod';
@@ -7,8 +8,9 @@ import User from '../../../domain/user/User';
 /**
  * Userを追加するAPI。
  */
+@injectable()
 export default class UserAddApi implements Api {
-  constructor(private readonly service: UserService) {}
+  constructor(@inject('UserService') private readonly service: UserService) {}
 
   public get uri() {
     return '/user';
@@ -24,7 +26,7 @@ export default class UserAddApi implements Api {
       const createdUser = await this.service.register(user);
       res.status(201).json(createdUser);
     } catch (e) {
-      console.error(e.message)
+      console.error(e.message);
       res.status(409);
       next('予期せぬエラーが発生しました。');
     }
