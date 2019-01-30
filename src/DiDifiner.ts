@@ -1,5 +1,5 @@
 import { Container } from 'inversify';
-import { Client } from 'pg';
+import { Pool } from 'pg';
 import UserDatasource from './infrastracture/datasource/user/UserDatasource';
 import UserRepository from './domain/user/UserRepository';
 import Settings from './domain/config/Settings';
@@ -20,7 +20,7 @@ export default class DiDifiner {
 
   private define(container: Container): void {
     container.bind<Settings>('Settings').toConstantValue(this.settings);
-    container.bind<Client>('DbClient').toConstantValue(this.createConnectedDbClient());
+    container.bind<Pool>('DbPool').toConstantValue(this.createConnectedDbPool());
 
     container.bind<UserRepository>('UserRepository').to(UserDatasource);
     container.bind<UserService>('UserService').to(UserService);
@@ -32,10 +32,10 @@ export default class DiDifiner {
     container.bind<ApiV1RouterWrapper>('ApiV1RouterWrapper').to(ApiV1RouterWrapper);
   }
 
-  private createConnectedDbClient(): Client {
-    const db = this.settings.pg;
-    const client = new Client(db);
-    client.connect();
-    return client;
+  private createConnectedDbPool(): Pool {
+    const dbSetting = this.settings.pg;
+    const pool = new Pool(dbSetting);
+    pool.connect();
+    return pool;
   }
 }
