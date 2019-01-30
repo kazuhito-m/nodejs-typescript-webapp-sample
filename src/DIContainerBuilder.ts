@@ -4,10 +4,8 @@ import UserDatasource from './infrastracture/datasource/user/UserDatasource';
 import UserRepository from './domain/user/UserRepository';
 import Settings from './domain/config/Settings';
 import UserService from './application/service/UserService';
-import UserAddApi from './presentation/apiv1/user/UserAddApi';
-import UserApi from './presentation/apiv1/user/UserApi';
-import UsersApi from './presentation/apiv1/user/UsersApi';
-import ApiV1RouterWrapper from './presentation/apiv1/ApiV1RouterWrapper';
+import UserController from './presentation/apiv1/user/UserController';
+import PhotoListController from './presentation/apiv1/PhotoListController';
 
 export default class DIContainerBuilder {
   constructor(private readonly settings: Settings) {}
@@ -25,11 +23,14 @@ export default class DIContainerBuilder {
     container.bind<UserRepository>('UserRepository').to(UserDatasource);
     container.bind<UserService>('UserService').to(UserService);
 
-    container.bind<UserAddApi>('UserAddApi').to(UserAddApi);
-    container.bind<UserApi>('UserApi').to(UserApi);
-    container.bind<UsersApi>('UsersApi').to(UsersApi);
+    // container.bind<UserAddApi>('UserAddApi').to(UserAddApi);
+    // container.bind<UserApi>('UserApi').to(UserApi);
+    // container.bind<UsersApi>('UsersApi').to(UsersApi);
 
-    container.bind<ApiV1RouterWrapper>('ApiV1RouterWrapper').to(ApiV1RouterWrapper);
+    // container.bind<ApiV1RouterWrapper>('ApiV1RouterWrapper').to(ApiV1RouterWrapper);
+
+    container.bind<PhotoListController>('PhotoListController').to(PhotoListController);
+    container.bind<UserController>('UserController').to(UserController);
   }
 
   private createConnectedDbPool(): Pool {

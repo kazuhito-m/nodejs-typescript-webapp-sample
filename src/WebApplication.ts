@@ -1,9 +1,7 @@
 import 'reflect-metadata';
-import * as express from 'express';
+import { InversifyExpressServer } from 'inversify-express-utils';
 import * as bodyParser from 'body-parser';
 import Parameters from './infrastracture/datasource/config/Parameters';
-import ApiV1RouterWrapper from './presentation/apiv1/ApiV1RouterWrapper';
-import { AddressInfo } from 'net';
 import DIContainerBuilder from './DIContainerBuilder';
 
 export default class WebApplication {
@@ -12,20 +10,19 @@ export default class WebApplication {
     parameters.analyzeArgs();
     const settings = parameters.loadSettings();
 
-    const diDifiner = new DIContainerBuilder(settings);
-    const container = diDifiner.build();
+    const builder = new DIContainerBuilder(settings);
+    const container = builder.build();
 
-    const app = express();
+    const rootConfig = { rootPath: '/api/v1' };
+    const server = new InversifyExpressServer(container, null, rootConfig);
+    server.setConfig(app => {
+      app.use(bodyParser.urlencoded({ extended: true }));
+      app.use(bodyParser.json());
+    });
 
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.json());
-
-    const apiV1RouterWrapper = container.get<ApiV1RouterWrapper>('ApiV1RouterWrapper');
-    app.use(apiV1RouterWrapper.uri, apiV1RouterWrapper.build());
-
-    const server = app.listen(settings.port, () => {
-      const port = (<AddressInfo>server.address()).port;
-      console.log('Node.js & Express is listening to Port:' + port);
+    const app = server.build();
+    app.listen(settings.port, () => {
+      console.log('Node.js & Express is listening to Port:' + settings.port);
     });
   }
 }
