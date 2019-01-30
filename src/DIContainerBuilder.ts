@@ -4,8 +4,10 @@ import UserDatasource from './infrastracture/datasource/user/UserDatasource';
 import UserRepository from './domain/user/UserRepository';
 import Settings from './domain/config/Settings';
 import UserService from './application/service/UserService';
-import UserController from './presentation/apiv1/user/UserController';
-import PhotoListController from './presentation/apiv1/PhotoListController';
+
+// DI auto register controllers.
+import './presentation/apiv1/user/UserController';
+import './presentation/apiv1/PhotoListController';
 
 export default class DIContainerBuilder {
   constructor(private readonly settings: Settings) {}
@@ -28,9 +30,6 @@ export default class DIContainerBuilder {
     // container.bind<UsersApi>('UsersApi').to(UsersApi);
 
     // container.bind<ApiV1RouterWrapper>('ApiV1RouterWrapper').to(ApiV1RouterWrapper);
-
-    container.bind<PhotoListController>('PhotoListController').to(PhotoListController);
-    container.bind<UserController>('UserController').to(UserController);
   }
 
   private createConnectedDbPool(): Pool {
