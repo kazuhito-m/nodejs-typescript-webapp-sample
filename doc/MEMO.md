@@ -45,6 +45,10 @@
 - https://hajipy.net/2018/08/inversify-basic/
 - https://qiita.com/Quramy/items/e65ee58cf1fba589c81b
 
+## inversify-express-utils 関連
+
+- https://github.com/inversify/inversify-express-utils
+
 ## Awilix
 
 こっちのほうが良さそうなんだけど、例が少ないなって。
@@ -53,6 +57,39 @@
 - https://github.com/talyssonoc/awilix-express
     - これを「TypeScriptでできたら」超良さそう…なんだけどなぁ
 
+# 問題
+
+## WebPackのminifyで「クラス名が消える」ことの影響と無効化方法
+
+DIのInversifyならびにinversify-express-utilsは「自動でDIコンテナへの登録」を実現するため、「クラス名を手がかり」にDI登録を行う。(特にutilsのコントローラは)
+
+しかし、webpackがproductionモードの場合、自動的に「minify」が効き、その設定が「クラス名を消す(別の名前、例えば "e"や"o"など)」挙動をするため、期待した動きにならない。
+
+WebPackのminifyは `Terser` というのを内部で使っており、設定するには `TerserPlugin` の設定を、webpack.config.js に書かなくてはならない。
+
+※設定は以下を参照
+
+- https://webpack.js.org/configuration/optimization/#optimization-minimize
+- https://webpack.js.org/plugins/terser-webpack-plugin/
+
+上記から、
+
+```javascript
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          keep_classnames: true
+        },
+      }),
+    ],
+  },
+};
+
+```
+
+あたりを設定する必要が在る。(要検証)
 
 # その他・一般ライブラリ
 

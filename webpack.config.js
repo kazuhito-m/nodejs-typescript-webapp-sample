@@ -1,8 +1,11 @@
-const path = require('path')
 const nodeExternals = require('webpack-node-externals')
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   mode: 'production',
+  optimization: {
+    minimize: false // ワークアラウンド設定。DIの仕組みのためにminifyでクラス名を消されると困るので抑制。
+  },
   entry: __dirname + "/src/index.ts", //ビルドするファイル
   output: {
     path: __dirname + '/dist', //ビルドしたファイルを吐き出す場所

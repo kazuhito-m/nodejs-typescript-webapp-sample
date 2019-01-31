@@ -10,6 +10,8 @@ Node.js and Express and TypeScript Web Application Sample
 - Express(Web Server)
 - TypeScript
 - PostgreSQL(RDBMS)
+- Inversify
+- inversify-express-utils
 
 ## Usage
 

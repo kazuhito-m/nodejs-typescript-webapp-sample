@@ -51,6 +51,7 @@
     "express": "^4.16.4",
     "express-list-endpoints": "^4.0.0",
     "inversify": "^5.0.1",
+    "inversify-express-utils": "^6.3.2",
     "moment": "^2.24.0",
     "pg": "^7.8.0",
     "reflect-metadata": "^0.1.13"
