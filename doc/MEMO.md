@@ -45,6 +45,10 @@
 - https://hajipy.net/2018/08/inversify-basic/
 - https://qiita.com/Quramy/items/e65ee58cf1fba589c81b
 
+## inversify-express-utils 関連
+
+- https://github.com/inversify/inversify-express-utils
+
 ## Awilix
 
 こっちのほうが良さそうなんだけど、例が少ないなって。
