@@ -3,26 +3,28 @@ import * as express from 'express';
 import * as request from 'supertest';
 
 describe('PhotoListController.getPhotoList() (uri:/photo/list(GET)) のテスト', () => {
-  it('写真情報が取得できる。', (done) => {
+  it('写真情報が取得できる。', done => {
     const expressApplication: Application = dummyExpressServer();
     request(expressApplication)
-        .get('/photo/list')
-        .expect(200)
-        .expect((response: request.Response) => {
-            const firstPhoto = response.body[0];
-            expect(firstPhoto.name).toEqual('photo001.jpg');
-            expect(firstPhoto.type).toEqual('jpg');
+      .get('/photo/list')
+      .expect(200)
+      .expect((response: request.Response) => {
+        const firstPhoto = response.body[0];
+        expect(firstPhoto.name).toEqual('photo001.jpg');
+        expect(firstPhoto.type).toEqual('jpg');
 
-            const secondPhoto = response.body[1];
-            expect(secondPhoto.id).toEqual('002');
-            expect(secondPhoto.dataUrl).toEqual('http://localhost:3000/data/photo002.jpg');
-        })
-        .end((error, response) => {
-            if (error) {
-                throw error;
-            }
-            done();
-        });
+        const secondPhoto = response.body[1];
+        expect(secondPhoto.id).toEqual('002');
+        expect(secondPhoto.dataUrl).toEqual(
+          'http://localhost:3000/data/photo002.jpg',
+        );
+      })
+      .end((error, response) => {
+        if (error) {
+          throw error;
+        }
+        done();
+      });
   });
 });
 
