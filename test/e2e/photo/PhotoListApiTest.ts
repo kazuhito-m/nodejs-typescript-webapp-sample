@@ -10,15 +10,13 @@ describe('PhotoListController.getPhotoList() (uri:/photo/list(GET)) のテスト
       .get('/photo/list')
       .expect(200)
       .expect((response: Response) => {
-        const firstPhoto = response.body[0];
-        expect(firstPhoto.name).toEqual('photo001.jpg');
-        expect(firstPhoto.type).toEqual('jpg');
+        const p1 = response.body[0];
+        expect(p1.name).toEqual('photo001.jpg');
+        expect(p1.type).toEqual('jpg');
 
-        const secondPhoto = response.body[1];
-        expect(secondPhoto.id).toEqual('002');
-        expect(secondPhoto.dataUrl).toEqual(
-          'http://localhost:3000/data/photo002.jpg',
-        );
+        const p2 = response.body[1];
+        expect(p2.id).toEqual('002');
+        expect(p2.dataUrl).toEqual('http://localhost:3000/data/photo002.jpg');
       })
       .end((error, response) => {
         if (error) {
