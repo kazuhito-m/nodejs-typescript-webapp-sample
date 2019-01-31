@@ -19,7 +19,8 @@
         "no-console": false,
         "no-require-imports": false,
         "no-var-requires": false,
-        "arrow-parens": false
+        "arrow-parens": false,
+        "curly": false
     },
     "rulesDirectory": []
 }

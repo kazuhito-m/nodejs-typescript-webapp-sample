@@ -19,9 +19,7 @@ describe('PhotoListController.getPhotoList() (uri:/photo/list(GET)) のテスト
         expect(p2.dataUrl).toEqual('http://localhost:3000/data/photo002.jpg');
       })
       .end((error, response) => {
-        if (error) {
-          throw error;
-        }
+        if (error) throw error;
         done();
       });
   });
