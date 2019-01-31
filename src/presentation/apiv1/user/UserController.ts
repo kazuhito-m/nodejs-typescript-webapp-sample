@@ -19,4 +19,15 @@ export default class UserController extends BaseHttpController {
     const users = await this.service.all();
     return this.json(users.list(), 200);
   }
+
+  @httpGet('/:userIdentifier')
+  public async getUser(@requestParam('userIdentifier') userIdentifier: number) {
+    try {
+      const user: User = await this.service.get(userIdentifier);
+      return this.json(user, 200);
+    } catch (e) {
+      console.error(e.message);
+      return this.internalServerError(e);
+    }
+  }
 }
