@@ -1,13 +1,13 @@
-import * as express from 'express';
 import { Application } from 'express';
 import * as request from 'supertest';
 import { Response } from 'supertest';
+import buildExpressApplicationForTest from '../test_index';
 
 describe('PhotoListController.getPhotoList() (uri:/photo/list(GET)) のテスト', () => {
   it('写真情報が取得できる。', done => {
-    const expressApplication: Application = dummyExpressServer();
+    const expressApplication: Application = buildExpressApplicationForTest();
     request(expressApplication)
-      .get('/photo/list')
+      .get('/api/v1/photo/list')
       .expect(200)
       .expect((response: Response) => {
         const p1 = response.body[0];
@@ -24,25 +24,3 @@ describe('PhotoListController.getPhotoList() (uri:/photo/list(GET)) のテスト
       });
   });
 });
-
-function dummyExpressServer(): Application {
-  const app = express();
-  app.get('/photo/list', (req, res) => {
-    const photoList = [
-      {
-        dataUrl: 'http://localhost:3000/data/photo001.jpg',
-        id: '001',
-        name: 'photo001.jpg',
-        type: 'jpg',
-      },
-      {
-        dataUrl: 'http://localhost:3000/data/photo002.jpg',
-        id: '002',
-        name: 'photo002.jpg',
-        type: 'jpg',
-      },
-    ];
-    res.json(photoList);
-  });
-  return app;
-}
