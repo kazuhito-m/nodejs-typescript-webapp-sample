@@ -4,13 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 module.exports = {
   mode: 'production',
   optimization: {
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          keep_classnames: true // ワークアラウンド設定。DIの仕組みのためにminifyでクラス名を消されると困るので抑制。
-        }
-      })
-    ]
+    minimize: false // ワークアラウンド設定。DIの仕組みのためにminifyでクラス名を消されると困るので抑制。
   },
   entry: __dirname + "/src/index.ts", //ビルドするファイル
   output: {
