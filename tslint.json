@@ -19,7 +19,7 @@
         "no-console": false,
         "no-require-imports": false,
         "no-var-requires": false,
-        "arrow-parens": true
+        "arrow-parens": false
     },
     "rulesDirectory": []
 }
