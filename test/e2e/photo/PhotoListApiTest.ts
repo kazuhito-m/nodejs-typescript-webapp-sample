@@ -1,6 +1,7 @@
-import { Application } from 'express';
 import * as express from 'express';
+import { Application } from 'express';
 import * as request from 'supertest';
+import { Response } from 'supertest';
 
 describe('PhotoListController.getPhotoList() (uri:/photo/list(GET)) のテスト', () => {
   it('写真情報が取得できる。', done => {
@@ -8,7 +9,7 @@ describe('PhotoListController.getPhotoList() (uri:/photo/list(GET)) のテスト
     request(expressApplication)
       .get('/photo/list')
       .expect(200)
-      .expect((response: request.Response) => {
+      .expect((response: Response) => {
         const firstPhoto = response.body[0];
         expect(firstPhoto.name).toEqual('photo001.jpg');
         expect(firstPhoto.type).toEqual('jpg');
