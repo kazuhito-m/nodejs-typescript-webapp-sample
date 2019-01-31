@@ -1,5 +1,5 @@
-import Users from "./Users";
 import User from './User';
+import Users from './Users';
 
 export default interface UserRepository {
     all(): Promise<Users>;

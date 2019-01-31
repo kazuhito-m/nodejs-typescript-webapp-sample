@@ -1,8 +1,8 @@
-import WebApplication from "./WebApplication";
+import WebApplication from './WebApplication';
 process.on('unhandledRejection', console.dir);
 
 // Support source map.
-require('source-map-support').install()
+require('source-map-support').install();
 process.on('unhandledRejection', console.log);
 
 const app = new WebApplication();

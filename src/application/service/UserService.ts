@@ -1,12 +1,12 @@
-import Users from '../../domain/user/Users';
-import UserRepository from '../../domain/user/UserRepository';
-import User from '../../domain/user/User';
 import { inject, injectable } from 'inversify';
+import User from '../../domain/user/User';
+import UserRepository from '../../domain/user/UserRepository';
+import Users from '../../domain/user/Users';
 
 @injectable()
 export default class UserService {
   constructor(
-    @inject('UserRepository') private readonly repository: UserRepository
+    @inject('UserRepository') private readonly repository: UserRepository,
   ) {}
 
   public all(): Promise<Users> {

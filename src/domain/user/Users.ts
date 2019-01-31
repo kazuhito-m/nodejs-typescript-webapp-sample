@@ -1,4 +1,4 @@
-import User from "./User";
+import User from './User';
 
 export default class Users {
     constructor(private readonly values: User[]) {

@@ -1,20 +1,21 @@
-import * as fs from "fs";
-import * as program from "commander";
-import Settings from "../../../domain/config/Settings";
+import * as program from 'commander';
+import * as fs from 'fs';
+import Settings from '../../../domain/config/Settings';
 
 export default class Parameters {
   private static readonly DEFAULT_SETTINGS_PATH = './config/settings.json';
 
   constructor(args: string[]) {
     program
-      .option("-s, --settings <path>", "設定ファイルのPath。")
+      .option('-s, --settings <path>', '設定ファイルのPath。')
       .parse(args);
   }
 
   public analyzeArgs() {
-    if (program.settings === undefined)
+    if (program.settings === undefined) {
     // TODO おそらく「自身JSからの相対パス」にすることができたほうが良さそう。
     program.settings = Parameters.DEFAULT_SETTINGS_PATH;
+    }
     return program;
   }
 
@@ -24,7 +25,7 @@ export default class Parameters {
   }
 
   private loadJsonFileToObject(filePath: string) {
-    const jsonText = fs.readFileSync(filePath, "utf8");
+    const jsonText = fs.readFileSync(filePath, 'utf8');
     return JSON.parse(jsonText);
   }
 }

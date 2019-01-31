@@ -1,13 +1,13 @@
 import { Container } from 'inversify';
 import { Pool } from 'pg';
-import UserDatasource from './infrastracture/datasource/user/UserDatasource';
-import UserRepository from './domain/user/UserRepository';
-import Settings from './domain/config/Settings';
 import UserService from './application/service/UserService';
+import Settings from './domain/config/Settings';
+import UserRepository from './domain/user/UserRepository';
+import UserDatasource from './infrastracture/datasource/user/UserDatasource';
 
 // DI auto register controllers.
-import './presentation/apiv1/user/UserController';
 import './presentation/apiv1/photo/PhotoListController';
+import './presentation/apiv1/user/UserController';
 
 export default class DIContainerBuilder {
   constructor(private readonly settings: Settings) {}

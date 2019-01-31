@@ -1,8 +1,8 @@
-import 'reflect-metadata';
-import { InversifyExpressServer } from 'inversify-express-utils';
 import * as bodyParser from 'body-parser';
-import Parameters from './infrastracture/datasource/config/Parameters';
+import { InversifyExpressServer } from 'inversify-express-utils';
+import 'reflect-metadata';
 import DIContainerBuilder from './DIContainerBuilder';
+import Parameters from './infrastracture/datasource/config/Parameters';
 
 export default class WebApplication {
   public async run(argv: string[]) {
@@ -15,13 +15,13 @@ export default class WebApplication {
 
     const rootConfig = { rootPath: '/api/v1' };
     const server = new InversifyExpressServer(container, null, rootConfig);
-    server.setConfig(app => {
+    server.setConfig((app) => {
       app.use(bodyParser.urlencoded({ extended: true }));
       app.use(bodyParser.json());
     });
 
-    const app = server.build();
-    app.listen(settings.port, () => {
+    const application = server.build();
+    application.listen(settings.port, () => {
       console.log('Node.js & Express is listening to Port:' + settings.port);
     });
   }
