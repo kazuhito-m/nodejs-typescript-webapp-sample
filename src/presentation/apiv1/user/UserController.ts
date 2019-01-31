@@ -1,10 +1,22 @@
-import { interfaces, controller, httpGet } from 'inversify-express-utils';
-import { Request, Response, NextFunction } from 'express';
+import {
+  controller,
+  httpGet,
+  BaseHttpController,
+  requestParam
+} from 'inversify-express-utils';
+import { inject } from 'inversify';
+import UserService from '../../../application/service/UserService';
+import User from '../../../domain/user/User';
 
 @controller('/users')
-export default class UserController implements interfaces.Controller {
+export default class UserController extends BaseHttpController {
+  constructor(@inject('UserService') private readonly service: UserService) {
+    super();
+  }
+
   @httpGet('/')
-  public index(req: Request, res: Response, next: NextFunction): string {
-    return 'よくわからないが、タダの文字列を返せるんかな？';
+  public async getUsers() {
+    const users = await this.service.all();
+    return this.json(users.list(), 200);
   }
 }
