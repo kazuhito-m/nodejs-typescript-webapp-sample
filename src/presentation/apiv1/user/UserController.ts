@@ -2,11 +2,14 @@ import {
   controller,
   httpGet,
   BaseHttpController,
-  requestParam
+  requestParam,
+  httpPost,
+  requestBody
 } from 'inversify-express-utils';
 import { inject } from 'inversify';
 import UserService from '../../../application/service/UserService';
 import User from '../../../domain/user/User';
+import { interfaces } from 'inversify-express-utils';
 
 @controller('/users')
 export default class UserController extends BaseHttpController {
@@ -21,7 +24,9 @@ export default class UserController extends BaseHttpController {
   }
 
   @httpGet('/:userIdentifier')
-  public async getUser(@requestParam('userIdentifier') userIdentifier: number) {
+  public async getUser(
+    @requestParam('userIdentifier') userIdentifier: number
+  ): Promise<interfaces.IHttpActionResult> {
     try {
       const user: User = await this.service.get(userIdentifier);
       return this.json(user, 200);
@@ -29,5 +34,14 @@ export default class UserController extends BaseHttpController {
       console.error(e.message);
       return this.internalServerError(e);
     }
+  }
+
+  @httpPost('/')
+  public async execute(
+    @requestBody() body: any
+  ): Promise<interfaces.IHttpActionResult> {
+    const user = User.prototypeOf(body.name);
+    const createdUser = await this.service.register(user);
+    return this.json(createdUser, 201);
   }
 }
