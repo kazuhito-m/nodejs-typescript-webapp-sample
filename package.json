@@ -67,7 +67,7 @@
       "\\.(ts)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testMatch": [
-      "**/test/**/*.ts"
+      "**/test/**/*Test.ts"
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [
