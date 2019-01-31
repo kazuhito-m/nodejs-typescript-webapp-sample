@@ -5,7 +5,7 @@
   "main": "dist/bundle.js",
   "scripts": {
     "build": "tslint --fix --project . && webpack",
-    "build_run": "webpack && node dist/bundle.js -s ./config/settings.json -a ./config/aliases.json",
+    "build_run": "tslint --fix --project . && webpack && node dist/bundle.js",
     "lint": "tslint --fix --project .",
     "test": "tslint --fix --project . && jest"
   },
