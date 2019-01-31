@@ -1,6 +1,5 @@
 import * as bodyParser from 'body-parser';
 import { InversifyExpressServer } from 'inversify-express-utils';
-import 'reflect-metadata';
 import DIContainerBuilder from './DIContainerBuilder';
 import Parameters from './infrastracture/datasource/config/Parameters';
 

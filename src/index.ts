@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import WebApplication from './WebApplication';
 process.on('unhandledRejection', console.dir);
 
