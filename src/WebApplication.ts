@@ -1,29 +1,29 @@
 import * as bodyParser from 'body-parser';
 import { Application } from 'express';
+import { Container } from 'inversify';
 import { InversifyExpressServer } from 'inversify-express-utils';
 import DIContainerBuilder from './DIContainerBuilder';
 import Settings from './domain/config/Settings';
-import Parameters from './infrastracture/datasource/config/Parameters';
 
 export default class WebApplication {
-  public async run(argv: string[]) {
-    const parameters = new Parameters(argv);
-    parameters.analyzeArgs();
-    const settings = parameters.loadSettings();
+  private container: Container;
 
-    const application = this.buildExpressApplication(settings);
+  constructor(private readonly settings: Settings) {}
 
-    application.listen(settings.port, () => {
-      console.log('Node.js & Express is listening to Port:' + settings.port);
+  public run(): void {
+    const application = this.buildExpressApplication();
+
+    application.listen(this.settings.port, () => {
+      console.log('Express is listening to Port:' + this.settings.port);
     });
   }
 
-  public buildExpressApplication(settings: Settings): Application {
-    const builder = new DIContainerBuilder(settings);
-    const container = builder.build();
+  public buildExpressApplication(): Application {
+    const builder = new DIContainerBuilder(this.settings);
+    this.container = builder.build();
 
     const rootConfig = { rootPath: '/api/v1' };
-    const server = new InversifyExpressServer(container, null, rootConfig);
+    const server = new InversifyExpressServer(this.container, null, rootConfig);
 
     server.setConfig(app => {
       app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,5 +31,10 @@ export default class WebApplication {
     });
 
     return server.build();
+  }
+
+  public close(): void {
+    const builder = new DIContainerBuilder(this.settings);
+    builder.end(this.container);
   }
 }

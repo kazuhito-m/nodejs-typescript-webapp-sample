@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import Settings from '../../src/domain/config/Settings';
 import WebApplication from '../../src/WebApplication';
 
-function buildExpressApplicationForTest() {
+export default function createThisApplicationForTest(): WebApplication {
   process.on('unhandledRejection', console.dir);
 
   // Support source map.
@@ -19,9 +19,5 @@ function buildExpressApplicationForTest() {
     },
     port: 3000,
   };
-
-  const app = new WebApplication();
-  return app.buildExpressApplication(settings);
+  return new WebApplication(settings);
 }
-
-export default buildExpressApplicationForTest;
