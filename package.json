@@ -7,7 +7,7 @@
     "build": "tslint --fix --project . && webpack",
     "build_run": "tslint --fix --project . && webpack && node dist/bundle.js",
     "lint": "tslint --fix --project .",
-    "migrate": "node env/local/db/migration/migrate.js",
+    "migrate": "node migration/migrate.js",
     "test": "tslint --fix --project . && jest"
   },
   "repository": {

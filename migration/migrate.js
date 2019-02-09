@@ -5,7 +5,7 @@ const {
 const path = require('path');
 
 // DB接続用設定を設定ファイルより抽出。
-const configFilePath = path.join(__dirname, '..', '..', '..', '..', 'config', 'settings.json');
+const configFilePath = path.join(__dirname, '..', 'config', 'settings.json');
 const pgDbSettings = require(configFilePath).pg;
 pgDbSettings.defaultDatabase = pgDbSettings.database;
 
