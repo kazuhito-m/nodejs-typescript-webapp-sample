@@ -1,5 +1,3 @@
-\connect sample
-
 CREATE SCHEMA sample_user AUTHORIZATION sample_user;
 
 CREATE SEQUENCE sample_user.users_seq;
