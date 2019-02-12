@@ -100,6 +100,19 @@ module.exports = {
 
 # その他・一般ライブラリ
 
-## 日付/moment 関係
+## TsLint
 
+- https://palantir.github.io/tslint/rules/
+- http://neos21.hatenablog.com/entry/2017/10/25/080000
+
+### VSCodeでtslintとフォーマッタなどを連携する方法
+
+うまいこと設定できてない。ググった結果くらいを列挙しておく。
+
+- http://www.atmarkit.co.jp/ait/articles/1807/27/news035.html
+- https://github.com/Microsoft/typescript-tslint-plugin#configuration-options
+- https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin
+
+
+## 日付/moment関係
 - https://qiita.com/taizo/items/3a5505308ca2e303c099
