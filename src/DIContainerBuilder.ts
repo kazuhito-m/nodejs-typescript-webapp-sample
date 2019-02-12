@@ -18,18 +18,15 @@ export default class DIContainerBuilder {
     return container;
   }
 
+  public end(container: Container): void {
+    container.get<Pool>('DbPool').end();
+  }
+
   private define(container: Container): void {
     container.bind<Settings>('Settings').toConstantValue(this.settings);
-    container.bind<Pool>('DbPool').toConstantValue(this.createConnectedDbPool());
+    container.bind<Pool>('DbPool').toConstantValue(new Pool(this.settings.pg));
 
     container.bind<UserRepository>('UserRepository').to(UserDatasource);
     container.bind<UserService>('UserService').to(UserService);
-  }
-
-  private createConnectedDbPool(): Pool {
-    const dbSetting = this.settings.pg;
-    const pool = new Pool(dbSetting);
-    pool.connect();
-    return pool;
   }
 }
