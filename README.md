@@ -3,7 +3,6 @@ Node.js and Express and TypeScript Web Application Sample
 
 ## What's this ?
 
-
 以下の組み合わせで、ウェブアプリケーションを作成したサンプル。
 
 - Node.js
@@ -12,6 +11,16 @@ Node.js and Express and TypeScript Web Application Sample
 - PostgreSQL(RDBMS)
 - Inversify
 - inversify-express-utils
+- pg
+- WebPack
+- postgres-migrations
+
+## Premise
+
+以下の環境が前提です。
+
+- Node.js : v10.11.0 or later
+- npm : 6.4.1 or later
 
 ## Usage
 
