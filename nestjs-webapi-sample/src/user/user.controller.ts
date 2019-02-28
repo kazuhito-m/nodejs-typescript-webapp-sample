@@ -1,17 +1,8 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Res,
-  Param,
-  Body,
-  HttpStatus,
-} from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, HttpStatus } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserEntity } from './user-entity';
-import { Response, response } from 'express';
-import { inspect } from 'util';
-import { Repository } from 'typeorm';
+import { Res } from '@nestjs/common';
+import { Response } from 'express';
 
 @Controller('api/v1/users')
 export class UserController {
@@ -19,12 +10,11 @@ export class UserController {
 
   @Get()
   public async all(): Promise<UserEntity[]> {
-    const users = await this.service.all();
-    return users;
+    return await this.service.all();
   }
 
   @Get(':userIdentifier')
-  public async user(
+  public async get(
     @Param('userIdentifier') userIdentifier: number,
   ): Promise<UserEntity> {
     return await this.service.get(userIdentifier);
@@ -32,10 +22,10 @@ export class UserController {
 
   @Post()
   public async register(
-    @Body() user: UserEntity,
-    @Res() res: Response,
+    @Body() userEntity: UserEntity,
+    @Res() response: Response,
   ): Promise<void> {
-    await this.service.register(user);
-    res.status(HttpStatus.CREATED).send();
+    this.service.register(userEntity);
+    response.status(HttpStatus.CREATED).send();
   }
 }
