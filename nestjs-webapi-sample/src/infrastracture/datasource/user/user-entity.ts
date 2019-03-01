@@ -6,7 +6,7 @@ import {
   Generated,
   PrimaryColumn,
 } from 'typeorm';
-import { IUser } from './user.interface';
+import { IUser } from '../../../domain/model/user/user.interface';
 
 @Entity('sample_user.users')
 export class UserEntity implements IUser {

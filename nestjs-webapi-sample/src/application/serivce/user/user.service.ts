@@ -1,6 +1,6 @@
 import { Injectable, UseInterceptors, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from './user-entity';
+import { UserEntity } from '../../../infrastracture/datasource/user/user-entity';
 import { Repository, QueryRunner } from 'typeorm';
 import { inspect } from 'util';
 

@@ -1,23 +1,15 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserService } from './user/user.service';
-import { UserModule } from './user/user.module';
+import { UserService } from './application/serivce/user/user.service';
+import { UserModule } from './application/serivce/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from './user/user-entity';
+import { UserEntity } from './infrastracture/datasource/user/user-entity';
+import SearchOrmConfigFile from './SearchOrmConfigFile';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'sample_user',
-      password: 'sample_password',
-      database: 'sample',
-      entities: [UserEntity],
-      synchronize: false, // 明示的に拒否
-    }),
+    TypeOrmModule.forRoot(new SearchOrmConfigFile().find([UserEntity])),
     TypeOrmModule.forFeature([UserEntity]),
     UserModule,
   ],
