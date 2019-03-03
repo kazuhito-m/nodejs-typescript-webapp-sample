@@ -1,4 +1,4 @@
-import { UserEntity } from '../infrastracture/datasource/user/user-entity';
+import { UserEntity } from '../../../../../src/infrastracture/datasource/user/user-entity';
 
 describe('UserEntity', () => {
   it('should be defined', () => {

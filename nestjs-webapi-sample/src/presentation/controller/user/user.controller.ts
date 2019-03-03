@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Post, Body, HttpStatus } from '@nestjs/common';
-import { UserService } from '../../application/serivce/user/user.service';
-import { UserEntity } from '../../infrastracture/datasource/user/user-entity';
+import { UserService } from '../../../application/serivce/user/user.service';
+import { UserEntity } from '../../../infrastracture/datasource/user/user-entity';
 import { Res } from '@nestjs/common';
 import { Response } from 'express';
 
