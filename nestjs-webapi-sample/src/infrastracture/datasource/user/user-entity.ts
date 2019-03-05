@@ -10,9 +10,7 @@ import { IUser } from '../../../domain/model/user/user.interface';
 
 @Entity('sample_user.users')
 export class UserEntity implements IUser {
-  //   @PrimaryGeneratedColumn('increment', { name: 'user_identifier' })
   @PrimaryColumn({ name: 'user_identifier' })
-  @Generated('rowid')
   userIdentifier: number;
 
   @Column({ name: 'name' })
