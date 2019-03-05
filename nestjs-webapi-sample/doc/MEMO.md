@@ -11,6 +11,11 @@
 - https://docs.nestjs.com/controllers
   - 本家の Contoroller 周り
 
+### DI 周り
+
+- https://github.com/nestjs/nest/issues/43
+  - インターフェイスを実装クラスで定義する方法
+
 ## TypeORM
 
 - https://github.com/typeorm/typeorm

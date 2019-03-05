@@ -1,34 +1,22 @@
 import { Injectable, UseInterceptors, Inject } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../../../infrastracture/datasource/user/user-entity';
-import { Repository, QueryRunner } from 'typeorm';
-import { inspect } from 'util';
+import UserRepository from '../../../domain/model/user/user.repository';
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(UserEntity)
-    private readonly repository: Repository<UserEntity>,
+    @Inject('UserRepository') private readonly repository: UserRepository,
   ) {}
 
   public all(): Promise<UserEntity[]> {
-    return this.repository.find();
+    return this.repository.all();
   }
 
   public async get(identifier: number): Promise<UserEntity> {
-    const condition = { userIdentifier: identifier };
-    return await this.repository.findOne(condition);
+    return await this.repository.get(identifier);
   }
 
   public async register(user: UserEntity): Promise<UserEntity> {
-    const newIdentifier = await this.nextSequence();
-    user.userIdentifier = newIdentifier;
-    return await this.repository.save<UserEntity>(user);
-  }
-
-  private async nextSequence(): Promise<number> {
-    const sql = 'SELECT nextval(\'users_seq\')';
-    const result = await this.repository.query(sql);
-    return result[0].nextval;
+    return await this.repository.register(user);
   }
 }

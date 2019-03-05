@@ -3,6 +3,7 @@ import { UserService } from '../../../application/serivce/user/user.service';
 import { UserEntity } from '../../../infrastracture/datasource/user/user-entity';
 import { Res } from '@nestjs/common';
 import { Response } from 'express';
+import UserDatasource from '../../../infrastracture/datasource/user/user.datasource';
 
 @Controller('api/v1/users')
 export class UserController {
