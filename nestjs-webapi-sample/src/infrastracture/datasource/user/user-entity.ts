@@ -5,24 +5,22 @@ import { Moment } from 'moment';
 
 @Entity('sample_user.users')
 export class UserEntity {
-  @PrimaryColumn({ name: 'user_identifier' })
-  userIdentifier: number;
-
-  @Column({ name: 'name' })
+  @PrimaryColumn()
+  user_identifier: number;
+  @Column()
   name: string;
-
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Moment;
+  @CreateDateColumn()
+  created_at: Moment;
 
   public toDomain(): User {
-    return new User(this.userIdentifier, this.name, this.createdAt);
+    return new User(this.user_identifier, this.name, this.created_at);
   }
 
   public static of(user: User, newIdentifier: number): UserEntity {
     const entity = new UserEntity();
-    entity.userIdentifier = newIdentifier;
+    entity.user_identifier = newIdentifier;
     entity.name = user.name;
-    entity.createdAt = user.createdAt;
+    entity.created_at = user.createdAt;
     return entity;
   }
 }

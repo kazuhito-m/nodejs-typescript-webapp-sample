@@ -16,8 +16,11 @@
         "no-console": false,
         "no-require-imports": false,
         "no-var-requires": false,
-        "curly": false
-
+        "curly": false,
+        "variable-name": [
+            true,
+            "allow-snake-case"
+        ]
     },
     "rulesDirectory": []
 }
