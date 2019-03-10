@@ -1,6 +1,7 @@
-import { UserEntity } from '../../../infrastracture/datasource/user/user-entity';
+import User from './user';
+
 export default interface UserRepository {
-  all(): Promise<UserEntity[]>;
-  get(identifier: number): Promise<UserEntity>;
-  register(user: UserEntity): Promise<UserEntity>;
+  all(): Promise<User[]>;
+  get(identifier: number): Promise<User>;
+  register(user: User): Promise<User>;
 }

@@ -1,8 +1,9 @@
 import UserRepository from '../../../domain/model/user/user.repository';
-import { UserEntity } from './user-entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
+import User from '../../../domain/model/user/user';
+import { UserEntity } from './user-entity';
 
 @Injectable()
 export default class UserDatasource implements UserRepository {
@@ -11,19 +12,21 @@ export default class UserDatasource implements UserRepository {
     private readonly dao: Repository<UserEntity>,
   ) {}
 
-  public all(): Promise<UserEntity[]> {
-    return this.dao.find();
+  public async all(): Promise<User[]> {
+    const entities = await this.dao.find();
+    return entities.map(e => e.toDomain());
   }
 
-  public async get(identifier: number): Promise<UserEntity> {
+  public async get(identifier: number): Promise<User> {
     const condition = { userIdentifier: identifier };
-    return await this.dao.findOne(condition);
+    const entity = await this.dao.findOne(condition);
+    return entity.toDomain();
   }
 
-  public async register(user: UserEntity): Promise<UserEntity> {
+  public async register(user: User): Promise<User> {
     const newIdentifier = await this.nextSequence();
-    user.userIdentifier = newIdentifier;
-    return await this.dao.save<UserEntity>(user);
+    const entity = UserEntity.of(user, newIdentifier);
+    return await this.dao.save<UserEntity>(entity);
   }
 
   private async nextSequence(): Promise<number> {

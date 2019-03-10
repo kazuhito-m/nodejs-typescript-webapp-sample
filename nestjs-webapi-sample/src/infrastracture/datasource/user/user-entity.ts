@@ -1,15 +1,10 @@
 import 'reflect-metadata';
-import {
-  Entity,
-  Column,
-  CreateDateColumn,
-  Generated,
-  PrimaryColumn,
-} from 'typeorm';
-import { IUser } from '../../../domain/model/user/user.interface';
+import { Entity, Column, CreateDateColumn, PrimaryColumn } from 'typeorm';
+import User from '../../../domain/model/user/user';
+import { Moment } from 'moment';
 
 @Entity('sample_user.users')
-export class UserEntity implements IUser {
+export class UserEntity {
   @PrimaryColumn({ name: 'user_identifier' })
   userIdentifier: number;
 
@@ -17,5 +12,17 @@ export class UserEntity implements IUser {
   name: string;
 
   @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
+  createdAt: Moment;
+
+  public toDomain(): User {
+    return new User(this.userIdentifier, this.name, this.createdAt);
+  }
+
+  public static of(user: User, newIdentifier: number): UserEntity {
+    const entity = new UserEntity();
+    entity.userIdentifier = newIdentifier;
+    entity.name = user.name;
+    entity.createdAt = user.createdAt;
+    return entity;
+  }
 }

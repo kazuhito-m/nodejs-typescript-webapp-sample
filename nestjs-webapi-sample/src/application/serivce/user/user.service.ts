@@ -1,6 +1,6 @@
 import { Injectable, UseInterceptors, Inject } from '@nestjs/common';
-import { UserEntity } from '../../../infrastracture/datasource/user/user-entity';
 import UserRepository from '../../../domain/model/user/user.repository';
+import User from 'src/domain/model/user/user';
 
 @Injectable()
 export class UserService {
@@ -8,15 +8,15 @@ export class UserService {
     @Inject('UserRepository') private readonly repository: UserRepository,
   ) {}
 
-  public all(): Promise<UserEntity[]> {
+  public all(): Promise<User[]> {
     return this.repository.all();
   }
 
-  public async get(identifier: number): Promise<UserEntity> {
+  public async get(identifier: number): Promise<User> {
     return await this.repository.get(identifier);
   }
 
-  public async register(user: UserEntity): Promise<UserEntity> {
+  public async register(user: User): Promise<User> {
     return await this.repository.register(user);
   }
 }
