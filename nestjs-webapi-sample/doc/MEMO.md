@@ -16,6 +16,10 @@
 - https://github.com/nestjs/nest/issues/43
   - インターフェイスを実装クラスで定義する方法
 
+### AOP 周り
+
+- https://docs.nestjs.com/interceptors
+
 ## TypeORM
 
 - https://github.com/typeorm/typeorm
