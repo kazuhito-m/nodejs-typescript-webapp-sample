@@ -18,7 +18,7 @@ export default class UserDatasource implements UserRepository {
   }
 
   public async get(identifier: number): Promise<User> {
-    const condition = { userIdentifier: identifier };
+    const condition = { user_identifier: identifier };
     const entity = await this.dao.findOne(condition);
     return entity.toDomain();
   }
@@ -26,7 +26,8 @@ export default class UserDatasource implements UserRepository {
   public async register(user: User): Promise<User> {
     const newIdentifier = await this.nextSequence();
     const entity = UserEntity.of(user, newIdentifier);
-    return await this.dao.save<UserEntity>(entity);
+    const registered = await this.dao.save<UserEntity>(entity);
+    return registered.toDomain();
   }
 
   private async nextSequence(): Promise<number> {

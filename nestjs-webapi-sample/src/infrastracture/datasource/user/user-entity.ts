@@ -13,7 +13,11 @@ export class UserEntity {
   created_at: Moment;
 
   public toDomain(): User {
-    return new User(this.user_identifier, this.name, this.created_at);
+    return new User(
+        this.user_identifier,
+        this.name,
+        this.created_at
+        );
   }
 
   public static of(user: User, newIdentifier: number): UserEntity {
