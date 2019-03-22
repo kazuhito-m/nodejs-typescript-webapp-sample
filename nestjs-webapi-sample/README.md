@@ -20,7 +20,10 @@ DB を起動し、アプリケーションをビルド・起動する必要が�
 ```bash
 npm install
 npm run build
-node ./dist/bundle.js
+
+cd ./dist
+cp ../ormconfig.json ./
+node ./src/main.js
 ```
 
 ## Special characteristics

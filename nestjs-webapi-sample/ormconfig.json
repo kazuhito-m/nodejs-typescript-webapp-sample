@@ -8,7 +8,7 @@
     "entities": ["src/**/*.entity{.ts,.js}"],
     "synchronize": false,
     "migrationsTableName": "public.custom_migration",
-    "migrations": ["migration/*.ts"],
+    "migrations": ["migration/*{.ts,.js}"],
     "cli": {
         "migrationsDir": "migration"
     },
