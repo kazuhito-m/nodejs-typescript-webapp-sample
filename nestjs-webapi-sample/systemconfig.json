@@ -1,0 +1,22 @@
+{
+    "sampleDb": {
+        "type": "postgres",
+        "host": "localhost",
+        "port": 5432,
+        "username": "sample_user",
+        "password": "sample_password",
+        "database": "sample",
+        "synchronize": false,
+        "logging": "all"
+    },
+    "otherDb": {
+        "type": "postgres",
+        "host": "localhost",
+        "port": 5432,
+        "username": "other_user",
+        "password": "other_password",
+        "database": "other",
+        "synchronize": false,
+        "logging": "all"
+    }
+}

@@ -1,17 +1,24 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as Path from 'path';
 import * as fs from 'fs';
+import SystemConfig from './domain/model/SystemConfig';
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
-export default class SearchOrmConfigFile {
-  public find(targetClassses: any, profile?: string): TypeOrmModuleOptions {
-    const sufix = profile ? '-' + profile : '';
-    const fileName = 'ormconfig' + sufix + '.json';
+export default class ConfigFileSearcher {
+  private static CONFIG_PREFIX = 'systemconfig';
+
+  private config: SystemConfig;
+
+  public search() {
+    const fileName = ConfigFileSearcher.CONFIG_PREFIX + '.json';
     const existsFilePath = this.searchFile(fileName);
-    if (existsFilePath === '') return undefined;
     console.log(existsFilePath);
     const json = JSON.parse(fs.readFileSync(existsFilePath, 'utf8'));
-    json.entities = targetClassses;
-    return json as TypeOrmModuleOptions;
+    this.config = json as SystemConfig;
+  }
+
+  public databaseSettings(profile: string): PostgresConnectionOptions {
+    return this.config[profile];
   }
 
   private searchFile(configFileName: string): string {
@@ -20,7 +27,7 @@ export default class SearchOrmConfigFile {
     const scriptDir = Path.dirname(process.argv[1]);
     const scriptNearPath = Path.join(scriptDir, configFileName);
     if (this.existsFile(scriptNearPath)) return scriptNearPath;
-    return '';
+    throw Error('設定ファイルが見つかりません。');
   }
 
   private existsFile(path: string): boolean {
