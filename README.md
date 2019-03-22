@@ -1,34 +1,35 @@
-Node.js and Express and TypeScript Web Application Sample
-==========================
+Node.js and TypeScript Web Application Sample
+===
 
 ## What's this ?
 
 以下の組み合わせで、ウェブアプリケーションを作成したサンプル。
 
 - Node.js
-- Express(Web Server)
 - TypeScript
 - PostgreSQL(RDBMS)
-- Inversify
-- inversify-express-utils
 - pg
 - WebPack
-- postgres-migrations
+
+WebFramework の個別の組み合わせは、サンプルとして以下のフォルダに。
+
+- [inversify-webapi-sample](inversify-webapi-sample/README.md)
+- [nestjs-webapi-sample](nestjs-webapi-sample/README.md)
 
 ## Premise
 
 以下の環境が前提です。
 
 - Node.js : v10.11.0 or later
-- npm : 6.4.1 or later
+- npm : 6.9.0 or later
 
 ## Usage
 
-DBを起動し、アプリケーションをビルド・起動する必要があります。
+DB を起動し、アプリケーションをビルド・起動する必要があります。
 
-### DBの起動
+### DB の起動
 
-`Docker` & `docker-comopose` とbashがあれば、以下のコマンドでPostgreSQLのDBを用意できます。
+`Docker` & `docker-comopose` と bash があれば、以下のコマンドで PostgreSQL の DB を用意できます。
 
 ```bash
 ./env/local/db/start.sh
@@ -36,12 +37,8 @@ DBを起動し、アプリケーションをビルド・起動する必要があ
 
 ### アプリケーションの起動
 
-```bash
-npm install
-npm run build
-node ./dist/bundle.js
-```
+個々フォルダの `README.md` 参照。
 
 ## author
 
-Kazuhito Miura ( [@kazuhito_m](https://twitter.com/kazuhito_m "kazuhito_m on Twitter") )
+Kazuhito Miura ( [@kazuhito_m](https://twitter.com/kazuhito_m 'kazuhito_m on Twitter') )

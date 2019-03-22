@@ -2,7 +2,26 @@
 
 ## What's this ?
 
-TypeScript + Nest.js + TypeORM で作成する「WebAPI の雛形」です。
+以下の組み合わせで、ウェブアプリケーションを作成したサンプル。
+
+- Nest.js
+- TypeORM
+
+## Usage
+
+DB を起動し、アプリケーションをビルド・起動する必要があります。
+
+### DB の起動
+
+上のフォルダの [README.md](../README.md) 参照。
+
+### アプリケーションの起動
+
+```bash
+npm install
+npm run build
+node ./dist/bundle.js
+```
 
 ## Special characteristics
 
