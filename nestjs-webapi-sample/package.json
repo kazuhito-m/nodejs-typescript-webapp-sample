@@ -5,6 +5,7 @@
     "author": "kazuhito_m",
     "license": "MIT",
     "scripts": {
+        "clean": "rm ./dist ",
         "build": "tsc -p tsconfig.build.json",
         "format": "prettier --write \"src/**/*.ts\"",
         "start": "ts-node -r tsconfig-paths/register src/main.ts",
@@ -13,9 +14,8 @@
         "prestart:prod": "rimraf dist && npm run build",
         "start:prod": "node dist/main.js",
         "lint": "tslint -p tsconfig.json -c tslint.json",
-        "test": "jest",
+        "test": "jest --coverage",
         "test:watch": "jest --watch",
-        "test:cov": "jest --coverage",
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
         "test:e2e": "jest --config ./test/jest-e2e.json",
         "migrate": "ts-node $(npm bin)/typeorm migration:run",
@@ -56,12 +56,16 @@
             "json",
             "ts"
         ],
-        "rootDir": "test/unit",
-        "testRegex": ".spec.ts$",
+        "testMatch": [
+            "**/test/**/*.spec.ts"
+        ],
         "transform": {
             "^.+\\.(t|j)s$": "ts-jest"
         },
-        "coverageDirectory": "../coverage",
-        "testEnvironment": "node"
+        "testEnvironment": "node",
+        "collectCoverage": true,
+        "collectCoverageFrom": [
+            "src/**/*.ts"
+        ]
     }
 }
