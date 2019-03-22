@@ -17,8 +17,13 @@ export default class ConfigFileSearcher {
     this.config = json as SystemConfig;
   }
 
-  public databaseSettings(profile: string): PostgresConnectionOptions {
-    return this.config[profile];
+  public databaseSettings(
+    profile: string,
+    entities: any[],
+  ): PostgresConnectionOptions {
+    const dbSettings = this.config[profile];
+    dbSettings.entities = entities;
+    return dbSettings as PostgresConnectionOptions;
   }
 
   private searchFile(configFileName: string): string {
