@@ -18,8 +18,7 @@
         "test:watch": "jest --watch",
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
         "test:e2e": "jest --config ./test/jest-e2e.json",
-        "migrate": "ts-node $(npm bin)/typeorm migration:run",
-        "create_migration": "ts-node migration:create -n "
+        "migrate": "node migration/migrate.js"
     },
     "dependencies": {
         "@nestjs/common": "^5.4.0",
@@ -27,6 +26,7 @@
         "@nestjs/typeorm": "^6.0.0",
         "moment": "^2.24.0",
         "pg": "^7.9.0",
+        "postgres-migrations": "^3.0.1",
         "reflect-metadata": "^0.1.12",
         "rimraf": "^2.6.2",
         "rxjs": "^6.2.2",

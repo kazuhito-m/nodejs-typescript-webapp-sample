@@ -22,7 +22,7 @@ npm install
 npm run build
 
 cd ./dist
-cp ../ormconfig.json ./
+cp ../systemconfig.json ./
 node ./src/main.js
 ```
 
