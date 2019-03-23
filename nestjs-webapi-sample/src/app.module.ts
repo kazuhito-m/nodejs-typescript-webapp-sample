@@ -24,8 +24,6 @@ config.search();
     OperationHistoryModule,
   ],
   providers: [
-    UserService,
-    OperationHistoryService,
     { provide: APP_INTERCEPTOR, useClass: LoggingInterceptor },
   ],
 })
