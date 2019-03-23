@@ -23,7 +23,7 @@ export default class OperationHistoryDatasource
   }
 
   private async nextSequence(): Promise<number> {
-    const sql = 'SELECT nextval(\'operation_histories_seq\')';
+    const sql = 'SELECT nextval(\'operation.operation_histories_seq\')';
     const result = await this.dao.query(sql);
     return result[0].nextval;
   }
