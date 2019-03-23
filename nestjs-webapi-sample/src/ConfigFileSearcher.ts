@@ -13,7 +13,6 @@ export default class ConfigFileSearcher {
   public search() {
     const fileName = ConfigFileSearcher.CONFIG_PREFIX + '.json';
     const existsFilePath = this.searchFile(fileName);
-    console.log(existsFilePath);
     const json = JSON.parse(fs.readFileSync(existsFilePath, 'utf8'));
     this.config = json as SystemConfig;
   }
