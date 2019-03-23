@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './presentation/controller/app.controller';
-import { AppService } from './app.service';
 import { UserService } from './application/serivce/user/user.service';
 import { UserModule } from './application/serivce/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -25,9 +23,7 @@ config.search();
     UserModule,
     OperationHistoryModule,
   ],
-  controllers: [AppController],
   providers: [
-    AppService,
     UserService,
     OperationHistoryService,
     { provide: APP_INTERCEPTOR, useClass: LoggingInterceptor },
