@@ -1,0 +1,43 @@
+{
+    "appenders": {
+        "system": {
+            "type": "dateFile",
+            "filename": "./logs/system.log",
+            "pattern": "yyyy-MM-dd"
+        },
+        "systemError": {
+            "type": "dateFile",
+            "filename": "./logs/error.log",
+            "pattern": "yyyy-MM-dd"
+        },
+        "errorOnly": {
+            "type": "logLevelFilter",
+            "appender": "systemError",
+            "level": "error"
+        },
+        "access": {
+            "type": "dateFile",
+            "filename": "./logs/access.log",
+            "pattern": "yyyy-MM-dd"
+        },
+        "operationLogger": {
+            "type": "dateFile",
+            "filename": "./logs/operationLogger.log",
+            "pattern": "yyyy-MM-dd"
+        },
+        "stdout": {
+            "type": "stdout"
+        }
+    },
+    "categories": {
+        "default": {
+            "appenders": [
+                "system",
+                "errorOnly",
+                "access",
+                "stdout"
+            ],
+            "level": "debug"
+        }
+    }
+}
