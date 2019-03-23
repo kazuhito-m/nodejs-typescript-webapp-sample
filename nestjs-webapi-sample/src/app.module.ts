@@ -3,7 +3,7 @@ import { UserService } from './application/serivce/user/user.service';
 import { UserModule } from './application/serivce/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './infrastracture/datasource/user/user-entity';
-import ConfigFileSearcher from './ConfigFileSearcher';
+import ConfigurationFileSearcher from './ConfigurationFileSearcher';
 import { LoggingInterceptor } from './presentation/controller/logging.interceptor';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { OperationHistoryEntity } from './infrastracture/datasource/operationhistory/operation.history.entity';
@@ -13,7 +13,7 @@ import { OperationHistoryService } from './application/serivce/operationhistory/
 const sampleEntities = [UserEntity];
 const otherEntities = [OperationHistoryEntity];
 
-const config = new ConfigFileSearcher();
+const config = new ConfigurationFileSearcher();
 config.search();
 
 @Module({

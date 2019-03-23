@@ -4,14 +4,14 @@ import * as fs from 'fs';
 import SystemConfig from './domain/model/SystemConfig';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
-export default class ConfigFileSearcher {
+export default class ConfigurationFileSearcher {
   private static CONFIG_PREFIX = 'systemconfig';
   private static DEFAULT_CONNECTION_NAME = 'sampleDb';
 
   private config: SystemConfig;
 
   public search() {
-    const fileName = ConfigFileSearcher.CONFIG_PREFIX + '.json';
+    const fileName = ConfigurationFileSearcher.CONFIG_PREFIX + '.json';
     const existsFilePath = this.searchFile(fileName);
     const json = JSON.parse(fs.readFileSync(existsFilePath, 'utf8'));
     this.config = json as SystemConfig;
@@ -22,7 +22,7 @@ export default class ConfigFileSearcher {
     entities: any[],
   ): PostgresConnectionOptions {
     const dbSettings = this.config[connectionName];
-    if (connectionName !== ConfigFileSearcher.DEFAULT_CONNECTION_NAME)
+    if (connectionName !== ConfigurationFileSearcher.DEFAULT_CONNECTION_NAME)
       dbSettings.name = connectionName;
     dbSettings.entities = entities;
     return dbSettings as PostgresConnectionOptions;
