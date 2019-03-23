@@ -8,23 +8,30 @@ import { UserEntity } from './infrastracture/datasource/user/user-entity';
 import ConfigFileSearcher from './ConfigFileSearcher';
 import { LoggingInterceptor } from './presentation/controller/logging.interceptor';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { OperationHistoryEntity } from './infrastracture/datasource/operationhistory/operation.history.entity';
+import { OperationHistoryModule } from './application/serivce/operationhistory/operation.history.module';
+import { OperationHistoryService } from './application/serivce/operationhistory/operation.history.service';
 
 const sampleEntities = [UserEntity];
-// const otherEntities = [];
+const otherEntities = [OperationHistoryEntity];
 
 const config = new ConfigFileSearcher();
 config.search();
 
 @Module({
   imports: [
-        TypeOrmModule.forRoot(config.databaseSettings('sampleDb', sampleEntities)),
+    TypeOrmModule.forRoot(config.databaseSettings('sampleDb', sampleEntities)),
     TypeOrmModule.forFeature(sampleEntities),
+    TypeOrmModule.forRoot(config.databaseSettings('otherDb', otherEntities)),
+    TypeOrmModule.forFeature(otherEntities, 'otherDb'),
     UserModule,
+    OperationHistoryModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
     UserService,
+    OperationHistoryService,
     { provide: APP_INTERCEPTOR, useClass: LoggingInterceptor },
   ],
 })

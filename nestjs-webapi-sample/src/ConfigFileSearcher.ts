@@ -22,6 +22,7 @@ export default class ConfigFileSearcher {
     entities: any[],
   ): PostgresConnectionOptions {
     const dbSettings = this.config[profile];
+    dbSettings.name = profile;
     dbSettings.entities = entities;
     return dbSettings as PostgresConnectionOptions;
   }

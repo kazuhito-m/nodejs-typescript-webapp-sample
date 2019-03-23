@@ -16,7 +16,7 @@ export class UserEntity {
     return new User(
         this.user_identifier,
         this.name,
-        this.created_at
+        this.created_at,
         );
   }
 
