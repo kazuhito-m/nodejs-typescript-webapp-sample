@@ -6,6 +6,7 @@ import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConne
 
 export default class ConfigFileSearcher {
   private static CONFIG_PREFIX = 'systemconfig';
+  private static DEFAULT_CONNECTION_NAME = 'sampleDb';
 
   private config: SystemConfig;
 
@@ -18,11 +19,12 @@ export default class ConfigFileSearcher {
   }
 
   public databaseSettings(
-    profile: string,
+    connectionName: string,
     entities: any[],
   ): PostgresConnectionOptions {
-    const dbSettings = this.config[profile];
-    dbSettings.name = profile;
+    const dbSettings = this.config[connectionName];
+    if (connectionName !== ConfigFileSearcher.DEFAULT_CONNECTION_NAME)
+      dbSettings.name = connectionName;
     dbSettings.entities = entities;
     return dbSettings as PostgresConnectionOptions;
   }

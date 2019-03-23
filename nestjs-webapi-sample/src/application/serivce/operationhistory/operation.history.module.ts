@@ -5,9 +5,12 @@ import OperationHistoryDatasource from 'src/infrastracture/datasource/operationh
 import { OperationHistoryService } from './operation.history.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([OperationHistoryEntity])],
+  imports: [TypeOrmModule.forFeature([OperationHistoryEntity], 'otherDb')],
   providers: [
-    { provide: 'OperationHistoryRepository', useClass: OperationHistoryDatasource },
+    {
+      provide: 'OperationHistoryRepository',
+      useClass: OperationHistoryDatasource,
+    },
     OperationHistoryService,
   ],
   exports: ['OperationHistoryRepository', OperationHistoryService],

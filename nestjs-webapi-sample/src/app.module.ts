@@ -21,9 +21,7 @@ config.search();
 @Module({
   imports: [
     TypeOrmModule.forRoot(config.databaseSettings('sampleDb', sampleEntities)),
-    TypeOrmModule.forFeature(sampleEntities),
     TypeOrmModule.forRoot(config.databaseSettings('otherDb', otherEntities)),
-    TypeOrmModule.forFeature(otherEntities, 'otherDb'),
     UserModule,
     OperationHistoryModule,
   ],
