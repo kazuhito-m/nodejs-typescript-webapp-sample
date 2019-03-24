@@ -20,11 +20,10 @@ export class LoggingInterceptor implements NestInterceptor<any, any> {
     context: ExecutionContext,
     next: CallHandler<any>,
   ): Observable<any> {
+    const now = Date.now();
+
     this.registerOperationHistory(context);
 
-    if (!this.logger.isDebugEnabled()) return next.handle().pipe();
-
-    const now = Date.now();
     return next.handle().pipe(
       tap(() => {
         const logText = `リクエスト返却完了。経過時間 : ${Date.now() - now}ms`;
