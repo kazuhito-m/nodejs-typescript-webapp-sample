@@ -1,5 +1,5 @@
 import { Logger, QueryRunner } from 'typeorm';
-import * as Log4js from '../node_modules/log4js/lib/log4js';
+import * as Log4js from 'log4js/lib/log4js';
 
 export default class Log4jsAdapterForTypeOrm implements Logger {
   private logger = Log4js.getLogger('TypeORM');

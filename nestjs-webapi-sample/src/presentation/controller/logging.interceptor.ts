@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { OperationHistoryService } from 'src/application/serivce/operationhistory/operation.history.service';
 import OperationHistory from 'src/domain/model/operationhistory/operation.history';
-import * as Log4js from '../../../node_modules/log4js/lib/log4js';
+import * as Log4js from 'log4js/lib/log4js';
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {

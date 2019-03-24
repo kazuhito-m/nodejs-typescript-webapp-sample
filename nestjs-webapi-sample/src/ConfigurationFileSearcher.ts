@@ -1,6 +1,6 @@
 import * as Path from 'path';
 import * as fs from 'fs';
-import * as Log4js from '../node_modules/log4js/lib/log4js';
+import * as Log4js from 'log4js/lib/log4js';
 import SystemConfig from './domain/model/SystemConfig';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import Log4jsAdapterForTypeOrm from './Log4jsAdapterForTypeOrm';

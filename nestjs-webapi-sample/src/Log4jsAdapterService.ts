@@ -1,6 +1,5 @@
 import { LoggerService } from '@nestjs/common';
-// import * as Log4js from 'log4js';
-import * as Log4js from '../node_modules/log4js/lib/log4js';
+import * as Log4js from 'log4js/lib/log4js';
 
 /**
  * Nest.jsの出すLogを、Log4jsに流すためのアダプタ。
