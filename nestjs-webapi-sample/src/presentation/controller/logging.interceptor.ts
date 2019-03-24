@@ -1,4 +1,6 @@
-import { Injectable, NestInterceptor, ExecutionContext } from '@nestjs/common';
+import { NestInterceptor, ExecutionContext } from '@nestjs/common';
+import { Injectable } from '@nestjs/common/decorators/core/injectable.decorator';
+import { CallHandler } from '@nestjs/common/interfaces';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { OperationHistoryService } from 'src/application/serivce/operationhistory/operation.history.service';
@@ -6,7 +8,7 @@ import OperationHistory from 'src/domain/model/operationhistory/operation.histor
 import * as Log4js from 'log4js/lib/log4js';
 
 @Injectable()
-export class LoggingInterceptor implements NestInterceptor {
+export class LoggingInterceptor implements NestInterceptor<any, any> {
   private readonly logger = Log4js.getLogger();
   private readonly operationLogger = Log4js.getLogger('operationLogger');
 
@@ -16,14 +18,14 @@ export class LoggingInterceptor implements NestInterceptor {
 
   public intercept(
     context: ExecutionContext,
-    next: Observable<any>,
+    next: CallHandler<any>,
   ): Observable<any> {
     this.registerOperationHistory(context);
 
-    if (!this.logger.isDebugEnabled()) return next.pipe();
+    if (!this.logger.isDebugEnabled()) return next.handle().pipe();
 
     const now = Date.now();
-    return next.pipe(
+    const reult = next.handle().pipe(
       tap(() => {
         const logText = `リクエスト返却完了。経過時間 : ${Date.now() - now}ms`;
         this.logger.debug(logText);
