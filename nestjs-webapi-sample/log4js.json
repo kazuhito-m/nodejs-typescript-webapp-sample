@@ -25,6 +25,16 @@
             "filename": "./logs/operationLogger.log",
             "pattern": "yyyy-MM-dd"
         },
+        "nest": {
+            "type": "dateFile",
+            "filename": "./logs/nest.log",
+            "pattern": "yyyy-MM-dd"
+        },
+        "sql": {
+            "type": "dateFile",
+            "filename": "./logs/sql.log",
+            "pattern": "yyyy-MM-dd"
+        },
         "stdout": {
             "type": "stdout"
         }
@@ -34,7 +44,38 @@
             "appenders": [
                 "system",
                 "errorOnly",
+                "stdout"
+            ],
+            "level": "info"
+        },
+        "access": {
+            "appenders": [
                 "access",
+                "system",
+                "stdout"
+            ],
+            "level": "info"
+        },
+        "NestJS": {
+            "appenders": [
+                "nest",
+                "system",
+                "stdout"
+            ],
+            "level": "debug"
+        },
+        "TypeORM": {
+            "appenders": [
+                "sql",
+                "system",
+                "stdout"
+            ],
+            "level": "debug"
+        },
+        "operationLogger": {
+            "appenders": [
+                "operationLogger",
+                "system",
                 "stdout"
             ],
             "level": "debug"
