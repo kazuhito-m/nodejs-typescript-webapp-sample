@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import * as Log4js from '../node_modules/log4js/lib/log4js';
 import SystemConfig from './domain/model/SystemConfig';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+import Log4jsAdapterForTypeOrm from './Log4jsAdapterForTypeOrm';
 
 export default class ConfigurationFileSearcher {
   private static CONFIG_PREFIX = 'systemconfig';
@@ -25,6 +26,7 @@ export default class ConfigurationFileSearcher {
     if (connectionName !== ConfigurationFileSearcher.DEFAULT_CONNECTION_NAME)
       dbSettings.name = connectionName;
     dbSettings.entities = entities;
+    dbSettings.logger = new Log4jsAdapterForTypeOrm(dbSettings.logging);
     return dbSettings as PostgresConnectionOptions;
   }
 
