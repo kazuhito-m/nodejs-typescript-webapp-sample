@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import Log4jsAdapterService from './Log4jsAdapterService';
+import Log4jsAdapterService from './application/logadapter/Log4jsAdapterService';
 import { INestApplication } from '@nestjs/common';
 import * as Log4js from 'log4js/lib/log4js';
 

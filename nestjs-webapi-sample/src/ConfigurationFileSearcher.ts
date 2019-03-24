@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as Log4js from 'log4js/lib/log4js';
 import SystemConfig from './domain/model/SystemConfig';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
-import Log4jsAdapterForTypeOrm from './Log4jsAdapterForTypeOrm';
+import Log4jsAdapterForTypeOrm from './application/logadapter/Log4jsAdapterForTypeOrm';
 
 export default class ConfigurationFileSearcher {
   private static CONFIG_PREFIX = 'systemconfig';
