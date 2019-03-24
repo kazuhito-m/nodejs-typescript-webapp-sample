@@ -25,7 +25,7 @@ export class LoggingInterceptor implements NestInterceptor<any, any> {
     if (!this.logger.isDebugEnabled()) return next.handle().pipe();
 
     const now = Date.now();
-    const reult = next.handle().pipe(
+    return next.handle().pipe(
       tap(() => {
         const logText = `リクエスト返却完了。経過時間 : ${Date.now() - now}ms`;
         this.logger.debug(logText);

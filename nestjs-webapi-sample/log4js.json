@@ -46,7 +46,7 @@
                 "errorOnly",
                 "stdout"
             ],
-            "level": "info"
+            "level": "debug"
         },
         "access": {
             "appenders": [
